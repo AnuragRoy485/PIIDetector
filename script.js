@@ -33,6 +33,27 @@ document
     }
   });
 
+function readPDF(file) {
+  // Implement PDF reading logic here
+}
+
+function readDOCX(file) {
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    const arrayBuffer = e.target.result;
+    mammoth
+      .extractRawText({ arrayBuffer: arrayBuffer })
+      .then(function (result) {
+        const text = result.value; // Extracted text
+        scanForPII(text); // Scan for PII in the extracted text
+      })
+      .catch(function (err) {
+        console.error("Error extracting text from DOCX:", err);
+      });
+  };
+  reader.readAsArrayBuffer(file);
+}
+
 function readImage(file) {
   const reader = new FileReader();
   reader.onload = function (e) {

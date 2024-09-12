@@ -1,0 +1,57 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PII Detector (PDF Support)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      text-align: center;
+      padding: 50px;
+    }
+
+    .container {
+      background-color: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      width: 60%;
+      margin: auto;
+    }
+
+    input[type="file"] {
+      margin-top: 20px;
+    }
+
+    .output {
+      margin-top: 20px;
+    }
+
+    .highlight {
+      background-color: #f44336;
+      color: white;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Dark Owl Government-issued PII Detector</h1>
+    <p>Upload a PDF, Text file or Images to scan for PII (e.g., Aadhaar, Social Security Number, PAN, Mobile Number, Name & Email Address).</p>
+    <input type="file" id="fileInput" />
+    <div id="output" class="output"></div>
+  </div>
+
+  <!-- Include PDF.js from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.4/dist/tesseract.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

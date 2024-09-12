@@ -34,8 +34,23 @@ document
   });
 
 function readPDF(file) {
-  // Implement PDF reading logic here
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const arrayBuffer = e.target.result;
+    pdfjsLib.getDocument({ data: arrayBuffer }).promise.then(pdf => {
+      let textPromises = [];
+      for (let i = 1; i <= pdf.numPages; i++) {
+        textPromises.push(pdf.getPage(i).then(page => page.getTextContent()));
+      }
+      Promise.all(textPromises).then(pages => {
+        let text = pages.map(page => page.items.map(item => item.str).join(' ')).join(' ');
+        scanForPII(text);
+      });
+    });
+  };
+  reader.readAsArrayBuffer(file);
 }
+
 
 function readDOCX(file) {
   const reader = new FileReader();
